@@ -1,4 +1,6 @@
 $(document).ready(function () {
+    //GET QUOTES
+    getQuotes()
     //REGISTER USER
     $("#registerBtn").click(function (e) {
         e.preventDefault();
@@ -20,8 +22,9 @@ $(document).ready(function () {
     });
     //GET QUOTES
     function getQuotes(){
-        $.get("http://quotes.stormconsultancy.co.uk/random.json",function(){
-
+        $.get("http://quotes.stormconsultancy.co.uk/random.json",function(data){
+            $(".quote").text(data.quote);
+            $(".author").text("-"+data.author)
         })
     }
 });

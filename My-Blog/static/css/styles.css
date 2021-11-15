@@ -38,3 +38,10 @@
     justify-content:center;
     align-items:center;
 }
+.quote{
+    text-align:center;
+}
+.author{
+    text-align:center;
+    font-weight:bold;
+}
