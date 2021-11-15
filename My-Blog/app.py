@@ -12,3 +12,12 @@ import os
 
 app = Flask(__name__)
 app.config['SECRET_KEY']="Abcd1234!@#$%^&*()EFGH"
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://nabuusu:12345@localhost/blog'
+db = SQLAlchemy(app)
+migrate = Migrate(app,db)
+
+###INDEX & LOGIN PAGE
+@app.route('/index',methods=['GET','POST'])
+@app.route('/',methods=['GET','POST'])
+def index():
+    return render_template("home.html")
