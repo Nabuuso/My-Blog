@@ -16,6 +16,13 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://nabuusu:12345@localhost/bl
 db = SQLAlchemy(app)
 migrate = Migrate(app,db)
 
+#Flask login
+login_manager = LoginManager()
+login_manager.init_app(app)
+login_manager.login_view = 'LOGIN'
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
 ##User model
 class User(db.Model,UserMixin):
     id = db.Column(db.Integer,primary_key=True)
@@ -55,6 +62,11 @@ def page_not_found(e):
 def register():
     return render_template("register.html")
 
+####DASHBOARD
+@app.route('/dashboard')
+def dashboard():
+    return render_template("dashboard.html")
+
 ##########REGISTER USER
 @app.route('/users',methods=['POST'])
 def users():
@@ -65,3 +77,37 @@ def users():
     db.session.add(user)
     db.session.commit()
     return redirect(url_for('register'))
+####LOGIN FORM
+class LoginForm(FlaskForm):
+    email = StringField("Email address", validators=[DataRequired()])
+    password = PasswordField("Password", validators=[DataRequired()])
+    submit = SubmitField("Login")
+
+###INDEX & LOGIN PAGE
+@app.route('/login',methods=['GET','POST'])
+def login():
+    form = LoginForm()
+    if(request.method == 'POST'):
+        if form.validate_on_submit():
+            user = User.query.filter_by(email=form.email.data).first()
+            if user:
+                try:
+                    print(user.password_hash)
+                    print(form.password.data)
+                    login_user(user)
+                    return redirect(url_for('dashboard'))
+                    # if check_password_hash(user.password_hash,form.password.data):
+                    #     print(user.password_hash)
+                    #     login_user(user)
+                    #     # flash("Login successfully")
+                    #     print(user)
+                    #     print('success')
+                    #     # return jsonify({'name':user.full_name,'email':user.email})
+                    #     return redirect(url_for('dashboard'))
+                    # else:
+                    #     flash("Wrong password - Try again")
+                except Exception as e:
+                    raise(e)
+            else:
+                flash("That user does not exist, try again!")
+    return render_template("login.html",form=form)

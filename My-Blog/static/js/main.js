@@ -18,4 +18,10 @@ $(document).ready(function () {
             location.reload()
         });
     });
+    //GET QUOTES
+    function getQuotes(){
+        $.get("http://quotes.stormconsultancy.co.uk/random.json",function(){
+
+        })
+    }
 });
