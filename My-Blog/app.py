@@ -12,8 +12,8 @@ import os
 
 app = Flask(__name__)
 app.config['SECRET_KEY']="Abcd1234!@#$%^&*()EFGH"
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://nabuusu:12345@localhost/blog'
-# app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://vkskuzjtpfprey:e398c343a325cf8bb6ed31d36a9c0ffdb808880edfabca3ac05e8bcd87c1da85@ec2-18-235-192-50.compute-1.amazonaws.com:5432/dc0ft18u45l7nh'
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://nabuusu:12345@localhost/blog'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://vkskuzjtpfprey:e398c343a325cf8bb6ed31d36a9c0ffdb808880edfabca3ac05e8bcd87c1da85@ec2-18-235-192-50.compute-1.amazonaws.com:5432/dc0ft18u45l7nh'
 db = SQLAlchemy(app)
 migrate = Migrate(app,db)
 
