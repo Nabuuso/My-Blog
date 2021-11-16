@@ -3,7 +3,7 @@
 By Sr Betty Nabuuso(fsp)
 
 ## Description
-A blogging website where you can create and share your opinions and other can read and comment on them.
+A blogging website where you can create and share your opinions and others can read and comment on them.
 
 # How it works
 * A user needs to sign up and add their blogs
