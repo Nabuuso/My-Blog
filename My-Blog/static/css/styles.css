@@ -99,3 +99,25 @@
     flex-direction:row;
     justify-content: space-between;
 }
+.blog-card-title{
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    font-weight:bold;
+}
+.blog-card-title:hover{
+    overflow:visble;
+}
+.blog-date{
+    text-align:right;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+}
+.blog-col{
+    border:1px solid #d3d3d3;
+    margin:10px;
+}
+.blog-col:hover{
+    overflow:visible;
+}

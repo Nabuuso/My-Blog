@@ -1,4 +1,6 @@
 $(document).ready(function () {
+    //CKEDITOR
+    CKEDITOR.replace('#blog');
     //GET QUOTES
     getQuotes()
     //REGISTER USER
@@ -21,12 +23,31 @@ $(document).ready(function () {
         });
     });
     //GET QUOTES
-    function getQuotes(){
-        $.get("http://quotes.stormconsultancy.co.uk/random.json",function(data){
-            $(".quote").text(data.quote);
-            $(".author").text("-"+data.author)
+    function getQuotes() {
+        $.get("http://quotes.stormconsultancy.co.uk/random.json", function (data) {
+            $(".quote").text('"'+data.quote+'"');
+            $(".author").text("-" + data.author)
         })
     }
-    //CKEDITOR
-    CKEDITOR.replace('#blog');
+
+    //SUBMIT BLOG
+    $("#submit-blog").click(function (e) {
+        e.preventDefault();
+        console.log(CKEDITOR.instances['blog'].getData())
+        $.ajax({
+            data: {
+                title: $('#blog-title').val(),
+                description:CKEDITOR.instances['blog'].getData(),
+                user:$('#user').val()
+            },
+            type: 'POST',
+            url: 'create-blog'
+        }).done(function (data) {
+            alert("Blog created successfully");
+            $('#title').val('')
+            $('#blog').val('')
+            // getSubCategory()
+            location.reload()
+        });
+    });
 });

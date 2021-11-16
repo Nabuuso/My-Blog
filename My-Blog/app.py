@@ -30,7 +30,7 @@ class User(db.Model,UserMixin):
     email = db.Column(db.String(200),nullable=False,unique=True)
     password_hash = db.Column(db.String(200))
     created_date = db.Column(db.DateTime,default=datetime.utcnow)
-    
+    blogs = db.relationship('Blog',backref="user_blogs")
     @property
     def password(self):
         raise AttributeError('Password is not a readable attribute')
@@ -41,11 +41,19 @@ class User(db.Model,UserMixin):
         return check_password_hash(self.password_hash,password)
     def __repr__(self):
         return '<Name %r>' % self.full_name
+##BLOG MODEL
+class Blog(db.Model):
+    id = db.Column(db.Integer,primary_key=True)
+    title = db.Column(db.String(200),nullable=False)
+    description = db.Column(db.Text)
+    user_id = db.Column(db.Integer,db.ForeignKey('user.id'))
+    created_date = db.Column(db.DateTime,default=datetime.utcnow)
 ###INDEX & LOGIN PAGE
 @app.route('/index',methods=['GET','POST'])
 @app.route('/',methods=['GET','POST'])
 def index():
-    return render_template("home.html")
+    blogs = Blog.query.order_by(Blog.created_date.desc()).all()
+    return render_template("home.html",blogs=blogs)
 
 ###ERROR 4O4
 @app.errorhandler(404)
@@ -126,3 +134,15 @@ def my_blogs():
 @app.route('/new-blog')
 def new_blog():
     return render_template("/dashboard/new_blog.html")
+##CREATE BLOG
+@app.route('/create-blog',methods=['POST','GET'])
+def create_blog():
+    if request.method == 'POST':
+        # categories = PitchCategory.query.
+        title = request.form['title']
+        description = request.form['description']
+        user_id = request.form['user']
+        blog = Blog(title=title,description=description,user_id=user_id)
+        db.session.add(blog)
+        db.session.commit()
+        return ('Blog created successfully')

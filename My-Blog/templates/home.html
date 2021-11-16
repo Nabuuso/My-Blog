@@ -1,13 +1,35 @@
 {% extends 'index.html' %}
 {% block home_content %}
-    <div class="container">
-        <div class="row">
-            <div class="col">
-                <div id="quote-section">
-                    <i><h5 class="quote"></h5></i>
-                    <p class="author"></p>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <div id="quote-section">
+                <i>
+                    <h5 class="quote"></h5>
+                </i>
+                <p class="author"></p>
+            </div>
+            
+            <div class="row">
+                <div class="col-12">
+                    <h3>Latest posts</h3>
+                    <hr>
                 </div>
+                {% for blog in blogs %}
+                <div class="col-lg-3 col-md-4 col-sm-2">
+                    <div class="card blog-col">
+                        <img src="{{ url_for('static',filename='/img/pattern.jpg')}}" class="card-img-top" alt="">
+                        <div class="card-body">
+                            <h5 class='blog-card-title'>{{ blog.title }}</h5>
+                            <p class="blog-date"><small><i>Posted: {{ blog.created_date.strftime('%a %b, %d %Y
+                                        %H:%M:%S')}}</i></small></p>
+                        </div>
+                    </div>
+
+                </div>
+                {% endfor %}
             </div>
         </div>
     </div>
+</div>
 {% endblock %}
