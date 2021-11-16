@@ -4,7 +4,7 @@
         <div class="row">
             <div class="col-lg-2 col-md-3 col-4 sidebar">
                 <div class="profile-header">
-                    <img src="{{ url_for('static', filename='/img/user.png')}}" alt="" class="logo">
+                    <img src="{{ url_for('static', filename='/img/user.png')}}" alt="" class="profile-pic">
                     <br>
                     <h6>{{ current_user.full_name }}</h6>
                     <span>{{ current_user.email }}</span>
@@ -14,11 +14,20 @@
             <br>
                 <ul class="sidebar-nav">
                     <li><a href="">My profile</a></li>
-                    <li><a href="">Blogs</a></li>
+                    <li><a href="{{ url_for('my_blogs') }}">Blogs</a></li>
                 </ul>
             </div>
             
-            <div class="col-8"></div>
+            <div class="col-lg-10 col-md-7 col-8 dashboard-content">
+                <div class="content-header">
+                    <h3 class="logo">My Blog</h3>
+                </div>
+                <div class="container-fluid">
+                    {% block dashboard_content %}
+
+                    {% endblock %}
+                </div>
+            </div>
         </div>
     </div>
 {% endblock %}

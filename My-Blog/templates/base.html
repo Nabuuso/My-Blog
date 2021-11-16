@@ -13,6 +13,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Praise&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static',filename='css/styles.css')}}">
     <script src="https://kit.fontawesome.com/b01a93a277.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.ckeditor.com/4.15.1/standard-all/ckeditor.js"></script>
 
 </head>
 
@@ -27,6 +28,9 @@
         integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
         crossorigin="anonymous"></script>
     <script src="{{ url_for('static', filename='js/main.js')}}"></script>
+    <script>
+        CKEDITOR.replace('blog');
+      </script>
 </body>
 
 </html>

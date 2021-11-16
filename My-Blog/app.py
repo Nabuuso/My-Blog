@@ -118,3 +118,11 @@ def logout():
     logout_user()
     # flash("You have successfully logged out!")
     return redirect(url_for('login'))
+##BLOGS PAGE
+@app.route('/my-blogs')
+def my_blogs():
+    return render_template("/dashboard/blog.html")
+##NEW BLOG
+@app.route('/new-blog')
+def new_blog():
+    return render_template("/dashboard/new_blog.html")

@@ -27,4 +27,6 @@ $(document).ready(function () {
             $(".author").text("-"+data.author)
         })
     }
+    //CKEDITOR
+    CKEDITOR.replace('#blog');
 });
