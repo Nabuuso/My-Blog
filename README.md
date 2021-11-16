@@ -21,10 +21,10 @@ A blogging website where you can create and share your opinions and others can r
 python3 -m venv virtual
 source virtual/bin/activate
 * To install all dependencies
-python3.6 -m pip install -r requirements.txt
+python3.8 -m pip install -r requirements.txt
 * To change the config_name parameter from 'production' to 'development'
 * Inside the manage.py module i.e:- app = create_app('production') should be app = create_app('development')
-*Then run python3.6 manage.py server to get the app running navigate to http://127.0.0.1:5000/ and it will open in your browser
+*Then run python3.8 manage.py server to get the app running navigate to http://127.0.0.1:5000/ and it will open in your browser
 ## Dependancy Installations
 * pip install python3.6
 * pip install flask
