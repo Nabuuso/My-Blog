@@ -48,13 +48,28 @@ class Blog(db.Model):
     description = db.Column(db.Text)
     user_id = db.Column(db.Integer,db.ForeignKey('user.id'))
     created_date = db.Column(db.DateTime,default=datetime.utcnow)
+    comments = db.relationship('Comment',backref="blog_comments",lazy="dynamic")
+##COMMENTS
+class Comment(db.Model):
+    id = db.Column(db.Integer,primary_key=True)
+    description = db.Column(db.Text)
+    blog_id = db.Column(db.Integer,db.ForeignKey('blog.id'))
+    created_date = db.Column(db.DateTime,default=datetime.utcnow)
 ###INDEX & LOGIN PAGE
 @app.route('/index',methods=['GET','POST'])
 @app.route('/',methods=['GET','POST'])
 def index():
     blogs = Blog.query.order_by(Blog.created_date.desc()).all()
     return render_template("home.html",blogs=blogs)
-
+###GET INDIVIDUAL BLOG DETAILS
+@app.route('/blog/<int:id>',methods=['GET','POST'])
+def blog_details(id):
+    blog = Blog.query.get_or_404(id)
+    comments = blog.comments.all()
+    if blog:
+        user = User.query.get_or_404(blog.user_id)
+        return render_template('blog_details.html',blog=blog,user=user,comments=comments)
+    return redirect(url_for('index'))
 ###ERROR 4O4
 @app.errorhandler(404)
 def page_not_found(e):
@@ -159,3 +174,14 @@ def edit_blog(id):
         db.session.add(blog)
         db.session.commit()
     return redirect(url_for('my-blogs',id=blog.user_id))
+##POST COMMENTS
+##########REGISTER USER
+@app.route('/blog/comments',methods=['POST','GET'])
+def comments():
+    if request.method == 'POST':
+        description = request.form['description']
+        blog = request.form['blog']
+        comment = Comment(description=description,blog_id=blog)
+        db.session.add(comment)
+        db.session.commit()
+        return redirect(url_for('index'))

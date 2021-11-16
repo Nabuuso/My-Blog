@@ -104,6 +104,7 @@
     overflow:hidden;
     text-overflow:ellipsis;
     font-weight:bold;
+    text-decoration:none;
 }
 .blog-card-title:hover{
     overflow:visble;
@@ -113,6 +114,8 @@
     white-space:nowrap;
     overflow:hidden;
     text-overflow:ellipsis;
+    text-decoration:none;
+    color:#000000;
 }
 .blog-col{
     border:1px solid #d3d3d3;
@@ -123,4 +126,34 @@
 }
 .dlt{
     color:#FF0000;
+}
+.submit-comment{
+    margin:0.5em;
+}
+.blog-footer{
+    display:flex;
+    flex-direction:row;
+    justify-content:space-between;
+}
+.blog-info-icon{
+    font-size:2em;
+    cursor:pointer;
+}
+.comment-form{
+    display:none;
+}
+.single-comment{
+    display:flex;
+    flex-direction:row;
+    justify-content:flex-start;
+    padding:1em;
+    border-bottom:1px dotted #d3d3d3;
+}
+.comment-icon{
+    width:50px;
+    border-radius:50%;
+    margin:0.5em;
+}
+.read-comments-section{
+    display:none;
 }

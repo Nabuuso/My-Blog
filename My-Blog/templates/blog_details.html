@@ -1,0 +1,46 @@
+{% extends 'index.html' %}
+{% block home_content %}
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <h3 style="text-align:center;font-weight:bolder;">{{ blog.title }}</h3>
+            <h6 style="text-align:right;"><i>Author: {{ user.full_name }}</i></h6>
+        </div>
+        <div class="col-12">
+            {{ blog.description | safe }}
+        </div>
+        <hr>
+        <div class="col-12 blog-footer">
+            <div class="blog-icons">
+                <i class='far fa-comment blog-info-icon comment-btn' data-id="{{blog.id}}"></i>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <i class='fab fa-readme blog-info-icon read-comments-btn' data-id="{{ blog.id}}"></i>
+            </div>
+            <div class="date">
+                <small><i>Posted: {{ blog.created_date.strftime('%a %b, %d %Y
+                    %H:%M:%S')}}</i></small>
+            </div>
+
+        </div>
+        <div class="col-12 comment-form" id="comment-form{{ blog.id }}">
+            <form action="">
+                <label for="comment{{blog.id}}">Comment</label>
+                <textarea id="comment{{blog.id}}" class="form-control" rows="10">
+                    </textarea>
+                <button class="btn btn-primary submit-comment" data-id="{{blog.id}}">Submit comment</button>
+            </form>
+        </div>
+        <div class="col-12 read-comments-section" id="read-comment{{blog.id}}">
+            <h3>Comments</h3>
+            {% for comment in comments %}
+                <div class="single-comment">
+                    <div><img src="{{ url_for('static', filename='/img/user.png')}}" class="comment-icon"/></div>
+                    <div><small>{{ comment.description}}</small></div>
+                </div>
+            {% endfor %}
+        </div>
+        <br>
+        <hr>
+    </div>
+</div>
+{% endblock %}

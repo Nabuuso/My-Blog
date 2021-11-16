@@ -50,4 +50,35 @@ $(document).ready(function () {
             location.reload()
         });
     });
+    //OPEN COMMENTS 
+    $(".comment-btn").click(function(e){
+        e.preventDefault()
+        let id = $(this).data("id");
+        $("#comment-form"+id).css({"display":"block"})
+    })
+    //SUBMIT COMMENT
+    $(".submit-comment").click(function(e){
+        e.preventDefault();
+        let id = $(this).data("id")
+        $.ajax({
+            url:'comments',
+            method:'POST',
+            data:{
+                description:$("#comment"+id).val().trim(),
+                blog:id
+            },
+            success:function(data){
+                alert("Comment created successfully");
+                $("#comment"+id).val('')
+                // getSubCategory()
+                location.reload()
+            }
+        })
+        
+    })
+    //READ COMMENTS
+    $(".read-comments-btn").click(function(e){
+        let id = $(this).data("id");
+        $("#read-comment"+id).css({"display":"block"})
+    })
 });
