@@ -7,7 +7,7 @@ A blogging website where you can create and share your opinions and other can re
 
 # How it works
 * A user needs to sign up and add their blogs
-* Python3.6
+* Python3.8
 * Flask
 * Bootstrap
 * PostgreSQL
