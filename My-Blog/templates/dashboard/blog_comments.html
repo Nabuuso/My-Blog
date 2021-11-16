@@ -1,0 +1,16 @@
+{% extends '/dashboard/dashboard.html' %}
+{% block dashboard_content %}
+<h4>{{ blog.title }} comments</h4>
+{% for comment in comments %}
+    <div class="card comment-details-card">
+        <div class="card-body">
+            <div>
+                {{ comment.description }}
+            </div>
+           <div>
+               <button class="btn btn-outline-danger btn-sm delete-comment-btn" data-id="{{ comment.id }}">Delete</button>
+           </div>
+        </div>
+    </div>
+{% endfor %}
+{% endblock %}

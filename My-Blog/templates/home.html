@@ -10,12 +10,12 @@
                 </div>
                 {% for blog in blogs %}
                 <div class="col-lg-4 col-md-6">
-                    <a href="{{ url_for('blog_details',id=blog.id)}}">
+                    <a href="{{ url_for('blog_details',id=blog.id)}}" style="text-decoration:none;" class="blog-link">
                         <div class="card blog-col">
                             <img src="{{ url_for('static',filename='/img/pattern.jpg')}}" class="card-img-top" alt="">
                             <div class="card-body">
-                                <h5 class='blog-card-title'>{{ blog.title }}</h5>
-                                <p class="blog-date"><small><i>Posted: {{ blog.created_date.strftime('%a %b, %d %Y
+                                <h5 class='blog-card-title' style="text-decoration:none;">{{ blog.title }}</h5>
+                                <p class="blog-date"><small><i style="text-decoration:none;">Posted: {{ blog.created_date.strftime('%a %b, %d %Y
                                             %H:%M:%S')}}</i></small></p>
                             </div>
                         </div>

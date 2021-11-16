@@ -21,8 +21,8 @@
                         <td>{{ blog.created_date.strftime('%a %b, %d %Y
                             %H:%M:%S')}}</td>
                         <td><a href="">Edit</a></td>
-                        <td><a href="">View comments</a></td>
-                        <td><a href="" class="dlt">Delete</a></td>
+                        <td><a href="{{ url_for('blog_comments',id=blog.id) }}">View comments</a></td>
+                        <td><a href="" class="dlt delete-blog-btn" data-id="{{ blog.id }}">Delete</a></td>
                     </tr>
                 {% endfor%}
             </table>

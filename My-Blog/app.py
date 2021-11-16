@@ -185,3 +185,29 @@ def comments():
         db.session.add(comment)
         db.session.commit()
         return redirect(url_for('index'))
+#######BLOG COMMENTS
+@app.route('/blog-comments/<int:id>',methods=['POST','GET'])
+def blog_comments(id):
+    blog = Blog.query.get_or_404(id)
+    comments = blog.comments.all()
+    return render_template("/dashboard/blog_comments.html",blog=blog,comments=comments)
+########DELETE COMMENTS
+@app.route('/blog-comments/delete-comments/<int:id>',methods=['POST','GET'])
+def delete_comments(id):
+    comment = Comment.query.get_or_404(id)
+    try:
+        db.session.delete(comment)
+        db.session.commit()
+        return('success')
+    except:
+        return('error')
+######DELETE BLOG
+@app.route('/my-blogs/delete-blog/<int:id>',methods=['POST','GET'])
+def delete_blog(id):
+    blog = Blog.query.get_or_404(id)
+    try:
+        db.session.delete(blog)
+        db.session.commit()
+        return('success')
+    except:
+        return('error')

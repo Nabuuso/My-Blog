@@ -123,6 +123,7 @@
 }
 .blog-col:hover{
     overflow:visible;
+    opacity:0.6;
 }
 .dlt{
     color:#FF0000;
@@ -156,4 +157,13 @@
 }
 .read-comments-section{
     display:none;
+}
+.blog-link:hover{
+    font-weight:bolder;
+}
+.comment-details-card{
+    margin:0.5em;
+}
+.delete-comment-btn{
+    float:right;
 }

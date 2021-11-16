@@ -25,7 +25,7 @@ $(document).ready(function () {
     //GET QUOTES
     function getQuotes() {
         $.get("http://quotes.stormconsultancy.co.uk/random.json", function (data) {
-            $(".quote").text('"'+data.quote+'"');
+            $(".quote").text('"' + data.quote + '"');
             $(".author").text("-" + data.author)
         })
     }
@@ -37,8 +37,8 @@ $(document).ready(function () {
         $.ajax({
             data: {
                 title: $('#blog-title').val(),
-                description:CKEDITOR.instances['blog'].getData(),
-                user:$('#user').val()
+                description: CKEDITOR.instances['blog'].getData(),
+                user: $('#user').val()
             },
             type: 'POST',
             url: 'create-blog'
@@ -51,34 +51,74 @@ $(document).ready(function () {
         });
     });
     //OPEN COMMENTS 
-    $(".comment-btn").click(function(e){
+    $(".comment-btn").click(function (e) {
         e.preventDefault()
         let id = $(this).data("id");
-        $("#comment-form"+id).css({"display":"block"})
+        $("#comment-form" + id).css({ "display": "block" })
     })
     //SUBMIT COMMENT
-    $(".submit-comment").click(function(e){
+    $(".submit-comment").click(function (e) {
         e.preventDefault();
         let id = $(this).data("id")
         $.ajax({
-            url:'comments',
-            method:'POST',
-            data:{
-                description:$("#comment"+id).val().trim(),
-                blog:id
+            url: 'comments',
+            method: 'POST',
+            data: {
+                description: $("#comment" + id).val().trim(),
+                blog: id
             },
-            success:function(data){
+            success: function (data) {
                 alert("Comment created successfully");
-                $("#comment"+id).val('')
+                $("#comment" + id).val('')
                 // getSubCategory()
                 location.reload()
             }
         })
-        
+
     })
     //READ COMMENTS
-    $(".read-comments-btn").click(function(e){
+    $(".read-comments-btn").click(function (e) {
         let id = $(this).data("id");
-        $("#read-comment"+id).css({"display":"block"})
+        $("#read-comment" + id).css({ "display": "block" })
+    })
+    //DELETE COMMENTS
+    $(".delete-comment-btn").click(function (e) {
+        e.preventDefault();
+        if (confirm("Are you sure you want to delete this record")) {
+            let id = $(this).data("id")
+            $.ajax({
+                url: 'delete-comments/' + id,
+                method: 'POST',
+                data: {},
+                success: function (data) {
+                    if (data == 'success') {
+                        alert("Comment deleted successfully");
+                    } else {
+                        alert("Record delete failed")
+                    }
+                    location.reload()
+                }
+            })
+        }
+    })
+    //DELETE BLOG
+    $(".delete-blog-btn").click(function (e) {
+        e.preventDefault();
+        if (confirm("Are you sure you want to delete this record ?")) {
+            let id = $(this).data("id")
+            $.ajax({
+                url: 'delete-blog/' + id,
+                method: 'POST',
+                data: {},
+                success: function (data) {
+                    if (data == 'success') {
+                        alert("Comment deleted successfully");
+                    } else {
+                        alert("Record delete failed")
+                    }
+                    location.reload()
+                }
+            })
+        }
     })
 });
