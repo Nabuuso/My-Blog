@@ -65,7 +65,7 @@ def register():
 ####DASHBOARD
 @app.route('/dashboard')
 def dashboard():
-    return render_template("dashboard.html")
+    return render_template("/dashboard/dashboard.html")
 
 ##########REGISTER USER
 @app.route('/users',methods=['POST'])
@@ -111,3 +111,10 @@ def login():
             else:
                 flash("That user does not exist, try again!")
     return render_template("login.html",form=form)
+##LOGOUT PAGE
+@app.route('/logout',methods=['GET','POST'])
+@login_required
+def logout():
+    logout_user()
+    # flash("You have successfully logged out!")
+    return redirect(url_for('login'))
