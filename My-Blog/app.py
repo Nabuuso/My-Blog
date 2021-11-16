@@ -127,9 +127,10 @@ def logout():
     # flash("You have successfully logged out!")
     return redirect(url_for('login'))
 ##BLOGS PAGE
-@app.route('/my-blogs')
-def my_blogs():
-    return render_template("/dashboard/blog.html")
+@app.route('/my-blogs/<int:id>',methods=['POST','GET'])
+def my_blogs(id):
+    blogs = Blog.query.order_by(Blog.created_date.desc()).filter_by(user_id=id)
+    return render_template("/dashboard/blog.html",blogs=blogs)
 ##NEW BLOG
 @app.route('/new-blog')
 def new_blog():
@@ -146,3 +147,15 @@ def create_blog():
         db.session.add(blog)
         db.session.commit()
         return ('Blog created successfully')
+##VIEW BLOB
+##EDIT BLOG
+@app.route('/my-blogs/edit/<int:id>',methods=['POST','GET'])
+def edit_blog(id):
+    blog = Blog.query.get_or_404(id)
+    if blog:
+        blog.title = request.form['title']
+        blog.description = request.form['description']
+        blog.user_id = request.form['user']
+        db.session.add(blog)
+        db.session.commit()
+    return redirect(url_for('my-blogs',id=blog.user_id))

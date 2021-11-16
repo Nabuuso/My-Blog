@@ -3,8 +3,29 @@
 <div class="row">
     <div class="col">
         <div class="blog-title-section">
-            <h4>Blog</h4>
+            <h4>My Blogs</h4>
             <a href="{{ url_for('new_blog') }}"><button type="button" class="btn btn-link">Create new blog</button></a>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <tr>
+                    <th>Title</th>
+                    <th>Created date</th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                {% for blog in blogs%}
+                    <tr>
+                        <td>{{ blog.title }}</td>
+                        <td>{{ blog.created_date.strftime('%a %b, %d %Y
+                            %H:%M:%S')}}</td>
+                        <td><a href="">Edit</a></td>
+                        <td><a href="">View comments</a></td>
+                        <td><a href="" class="dlt">Delete</a></td>
+                    </tr>
+                {% endfor%}
+            </table>
         </div>
     </div>
 </div>
