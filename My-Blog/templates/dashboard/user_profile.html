@@ -1,0 +1,12 @@
+{% extends '/dashboard/dashboard.html' %}
+{% block dashboard_content %}
+    <div class="row">
+        <div class="col">
+            <h4>My Profile</h4>
+            <p><b>Full name:</b> {{ current_user.full_name}}</p>
+            <p><b>Email:</b> {{ current_user.email }}</p>
+            <p><b>Created date:</b> {{ current_user.created_date.strftime('%a %b, %d %Y
+                %H:%M:%S') }}</p>
+        </div>
+    </div>
+{% endblock %}

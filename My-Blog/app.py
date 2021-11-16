@@ -211,3 +211,7 @@ def delete_blog(id):
         return('success')
     except:
         return('error')
+#####MY PROFILE
+@app.route('/profile')
+def profile():
+    return render_template('/dashboard/user_profile.html')

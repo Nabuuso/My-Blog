@@ -13,7 +13,7 @@
                 <br>
             <br>
                 <ul class="sidebar-nav">
-                    <li><a href="">My profile</a></li>
+                    <li><a href="{{ url_for('profile')}}">My profile</a></li>
                     <li><a href="{{ url_for('my_blogs',id=current_user.id) }}">Blogs</a></li>
                 </ul>
             </div>
